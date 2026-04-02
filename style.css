@@ -48,6 +48,7 @@ body {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     gap: 12px;
     background: linear-gradient(135deg, var(--whatsapp-green), #1ebc5c);
     color: var(--pure-white);
@@ -291,6 +292,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    margin-top: 2.5rem;
     align-items: center; /* Alinha o centro para dar o efeito de destaque real */
 }
 
@@ -356,6 +358,7 @@ body {
     border-radius: 20px;
     text-transform: uppercase;
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.4);
+    white-space: nowrap;
 }
 
 .featured-card .btn-primary-giant {
