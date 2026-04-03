@@ -1,6 +1,39 @@
 document.addEventListener("DOMContentLoaded", function() {
-    
-    // Configura os Accordions de FAQ
+
+    // ============ SCROLL-REVEAL (IntersectionObserver) ============
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.12,
+            rootMargin: "0px 0px -30px 0px",
+        }
+    );
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+
+    // ============ HEADER: Glass shadow on scroll ============
+    const header = document.querySelector(".clean-header");
+
+    if (header) {
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 20) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        }, { passive: true });
+    }
+
+    // ============ FAQ ACCORDION ============
     const faqQuestions = document.querySelectorAll(".faq-question");
 
     faqQuestions.forEach(question => {
@@ -23,12 +56,24 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Se está aberto, fecha
                 answer.style.maxHeight = null;
             } else {
-                // Se está fechado, abre colocando um max-height com base no scrollHeight real do parágrafo
+                // Se está fechado, abre com base no scrollHeight real
                 answer.style.maxHeight = answer.scrollHeight + "px";
             }
         });
     });
 
-    // Em simulação real de uma VSL, a chamada (CTAs) em algumas abordagens pode ficar invisível até X tempo de vídeo.
-    // Nessa implementação como o foco é VSL rápida/direta para B2C imediatista, já deixamos os botões abertos.
+    // ============ CTA BUTTON MICRO-INTERACTION ============
+    const ctaButtons = document.querySelectorAll(".btn-primary-giant");
+    ctaButtons.forEach(btn => {
+        btn.addEventListener("mousedown", function() {
+            this.style.transform = "translateY(0) scale(0.97)";
+        });
+        btn.addEventListener("mouseup", function() {
+            this.style.transform = "";
+        });
+        btn.addEventListener("mouseleave", function() {
+            this.style.transform = "";
+        });
+    });
+
 });
